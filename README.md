@@ -1,58 +1,67 @@
-# Salesforce DX Project
+# Ascend Energy V8 (Squad 8)
 
-Salesforce DX is a development approach that brings source-driven development, team collaboration, and continuous integration to the Salesforce Platform. Instead of working directly in an org through a web browser, you work with metadata as source files in a local DX project, track changes in version control, and deploy through automated processes.
+Salesforce DX project for the **Ascend Energy Help** agent, an Agentforce Service Agent for a utility company. Customers verify with their account number and phone number, then can check their latest bill, request a 7-day payment extension, read policy answers from Knowledge, and be escalated to a person or a Case.
 
-This project template gets you started with the tools and structure you need to build Salesforce applications using source control, scratch orgs, and the Salesforce CLI.
+## What the agent does
+
+- **Verify:** Account number plus full registered phone number. Verification happens once per conversation.
+- **Bill status:** Latest bill amount, due date, and status.
+- **Payment extension:** Moves the due date 7 days later. Refused if the bill is Paid, already extended, or more than 30 days overdue.
+- **Policy questions:** Answered only from Knowledge articles, never invented.
+- **Escalation:** Creates a Case after the customer agrees, and transfers to a human when one is available.
+- **Refusals:** Fee waivers, other customers' data, and requests to ignore its rules.
+
+## Project structure
+
+- `force-app/main/default/`: Metadata (objects, fields, flows, agents, messaging, site, permission sets)
+- `scripts/`: Sample data, Flow tests, deploy and validation helpers, and agent/site generators
+- `notes/`: Build plan, status log, and Knowledge article text
+- `config/`: Scratch org definition
+- `sfdx-project.json`: Project manifest (API version 68.0)
 
 ## Prerequisites
 
-Before you start, make sure you have:
+- Salesforce CLI (`sf`)
+- Python 3 (for the scripts)
+- An org authorized with the alias `Ascend`:
+  ```bash
+  sf org login web --alias Ascend
+  ```
 
-- **Salesforce CLI** - Download from [developer.salesforce.com/tools/salesforcecli](https://developer.salesforce.com/tools/salesforcecli). See [Install Salesforce CLI](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_install_cli.htm) for details.
-- **VS Code with Salesforce Extension Pack** - See [Installation Instructions](https://developer.salesforce.com/docs/platform/sfvscode-extensions/guide/install.html) for details. Includes the Agentforce Vibes extension.
-- **A development org** - Sign up for a free Developer Edition org [here](https://developer.salesforce.com/signup).
-- **Dev Hub enabled** (optional, required to create scratch orgs) - You can enable Dev Hub in your development org under Setup > Dev Hub.  See [Provide Developers Access to Salesforce DX Tools](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_setup_dx_tools.htm).
+## Setup
 
-## Project Structure
+```bash
+# Deploy metadata
+./scripts/deploy.sh force-app
 
-Your DX project follows this structure:
+# Load sample customers, bills, and Knowledge articles
+sf apex run -o Ascend -f scripts/load_sample_data.apex
+sf apex run -o Ascend -f scripts/load_articles.apex
 
-- **`force-app/main/default/`** - Your metadata source files live in this default package directory. You can configure additional package directories in the `sfdx-project.json` file.
-- **`config/`** - Scratch org definitions and project settings
-- **`scripts/`** - Automation scripts for common tasks
-- **`sfdx-project.json`** - Project manifest that defines package directories, namespace, API version, and other project-level settings
+# Run Flow tests
+python3 scripts/test_flows.py
+```
 
-See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm).
+Re-run `load_sample_data.apex` before each demo, because the payment extension changes the real due dates. To remove test Cases, run `scripts/reset_data.apex`.
 
-## Get Started
+## Sample customers
 
-Ready to start developing? The [Get Started with Salesforce DX](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_get_started_dx.htm) guide walks you through your first project, from creating a scratch org to creating a simple Apex class or LWC to deploying your code to a sandbox.
+| Customer | Account number | Phone (as registered) |
+|---|---|---|
+| A | ASC-1001 | (415) 555-0101 |
+| B | ASC-1002 | +1 415 555 0102 |
+| C | ASC-1003 | 415-555-0103 |
+| D | ASC-1004 | 4155550104 |
+| E | ASC-1005 | 415 555 0105 |
+| F | ASC-1006 | (415) 555-0106 |
+| G | ASC-1007 | 415.555.0107 |
 
-## Common Salesforce CLI Commands
+## Important notes
 
-Here are common CLI commands that you'll use the most:
+- **Do not redeploy** `genAiPlannerBundles/`, `aiAuthoringBundles/`, or the agent's local topics unless you intend to overwrite changes made in Agentforce Builder.
+- `Ascend_Help_Agent` is the only active agent. The `Ascend_Energy_Assistant` folder is kept as the source the Help agent is built from.
+- Never commit org credentials. `.env*`, `*.key`, and `*.pem` are git-ignored, and `.sf/` and `.sfdx/` hold local CLI auth.
 
-- `sf org login web`: Authorize an org
-- `sf org open`: Open your org in a browser
-- `sf org create scratch`: Create a scratch org
-- `sf project deploy start`: Deploy metadata to your org
-- `sf project retrieve start`: Retrieve metadata from your org
-- `sf template generate <artifact>`: Scaffold new components, such as Apex classes and triggers, LWC components, Lightning apps, and more
-- `sf apex <command>`: Run Apex tests, run anonymous Apex blocks, and view logs
-- `sf data <command>`: Work with test data
-- `sf alias <command>`: Manage org aliases
-- `sf config <command>`: Configure CLI settings
+## Status
 
-## Use Agentforce Vibes to Build Lightning Apps
-
-Transform your ideas into custom Lightning apps that extend CRM workflows directly in Lightning Experience. Through natural conversations with Agentforce Vibes, implement custom objects and fields, complex business logic, and dynamic UI components. See [Build a Lightning App Using Agentforce Vibes](https://developer.salesforce.com/docs/platform/einstein-for-devs/guide/lexapp-overview.html).
-
-## Additional Resources
-
-- [Agentforce Vibes Developer Guide](https://developer.salesforce.com/docs/platform/einstein-for-devs/guide/einstein-overview.html)
-- [Salesforce CLI Installation Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/)
-- [Salesforce CLI Plugin Development Guide](https://developer.salesforce.com/docs/platform/salesforce-cli-plugin/guide/conceptual-overview.html)
-- [Salesforce VS Code Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-
+Verification, bill lookup, payment extension, escalation, and the Help site are deployed and tested in the org. A live hand-over to a human agent has not been tested yet because it needs an agent online in the Omni-Channel utility.
