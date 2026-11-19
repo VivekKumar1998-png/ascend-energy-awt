@@ -1,0 +1,63 @@
+{
+  "unevaluatedProperties": false,
+  "properties": {
+    "billFound": {
+      "title": "Bill Found",
+      "description": "True if the customer has a bill.",
+      "lightning:type": "lightning__booleanType",
+      "lightning:isPII": false,
+      "copilotAction:isDisplayable": false,
+      "copilotAction:isUsedByPlanner": true
+    },
+    "billNumber": {
+      "title": "Bill Number",
+      "description": "Bill number.",
+      "lightning:type": "lightning__textType",
+      "lightning:isPII": false,
+      "copilotAction:isDisplayable": false,
+      "copilotAction:isUsedByPlanner": true
+    },
+    "amount": {
+      "title": "Amount",
+      "description": "Bill amount.",
+      "lightning:type": "lightning__numberType",
+      "lightning:isPII": false,
+      "copilotAction:isDisplayable": false,
+      "copilotAction:isUsedByPlanner": true
+    },
+    "dueDate": {
+      "title": "Due Date",
+      "description": "Due date of the bill.",
+      "lightning:type": "lightning__dateType",
+      "lightning:isPII": false,
+      "copilotAction:isDisplayable": false,
+      "copilotAction:isUsedByPlanner": true
+    },
+    "status": {
+      "title": "Status",
+      "description": "Unpaid, Paid or Overdue.",
+      "lightning:type": "lightning__textType",
+      "lightning:isPII": false,
+      "copilotAction:isDisplayable": false,
+      "copilotAction:isUsedByPlanner": true
+    },
+    "extended": {
+      "title": "Extended",
+      "description": "True if the bill already had its one extension.",
+      "lightning:type": "lightning__booleanType",
+      "lightning:isPII": false,
+      "copilotAction:isDisplayable": false,
+      "copilotAction:isUsedByPlanner": true
+    },
+    "daysOverdue": {
+      "title": "Days Overdue",
+      "description": "Days past the due date. 0 if paid or not yet due.",
+      "lightning:type": "lightning__numberType",
+      "lightning:isPII": false,
+      "copilotAction:isDisplayable": false,
+      "copilotAction:isUsedByPlanner": true
+    }
+  },
+  "lightning:type": "lightning__objectType",
+  "lightning:textIndexed": true
+}

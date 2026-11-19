@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Checks that the customer account number and the registered phone number (exactly 10 digits, any format) belong to the same customer. Returns verified true or false, blocked, the customer Id and first name. Inputs must be exactly what the customer typed. Set claimsToBeSomeoneElse to true only if the customer said they are not the account holder or are asking about another person. Only available until the customer has been verified once in the conversation.</description>
+    <invocationTarget>Verify_Customer</invocationTarget>
+    <invocationTargetType>flow</invocationTargetType>
+    <isConfirmationRequired>false</isConfirmationRequired>
+    <masterLabel>Verify Customer</masterLabel>
+</GenAiFunction>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Phone_Last10__c</fullName>
+    <label>Phone Last 10 Digits</label>
+    <description>Last 10 digits of the registered phone. Verify Customer compares this with the 10 digits the customer types, so a stored +1 number still matches.</description>
+    <type>Text</type>
+    <formula>RIGHT(Phone_Digits__c, 10)</formula>
+    <formulaTreatBlanksAs>BlankAsBlank</formulaTreatBlanksAs>
+</CustomField>

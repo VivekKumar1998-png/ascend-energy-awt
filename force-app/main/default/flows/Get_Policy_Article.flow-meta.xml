@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+<apiVersion>68.0</apiVersion>
+<assignments><name>Set_Article</name><label>Set Article</label><locationX>176</locationX><locationY>450</locationY><assignmentItems><assignToReference>found</assignToReference><operator>Assign</operator><value><booleanValue>true</booleanValue></value></assignmentItems><assignmentItems><assignToReference>title</assignToReference><operator>Assign</operator><value><elementReference>Find_Article.Title</elementReference></value></assignmentItems><assignmentItems><assignToReference>content</assignToReference><operator>Assign</operator><value><elementReference>Find_Article.FAQ_Answer__c</elementReference></value></assignmentItems></assignments>
+
+<assignments><name>No_Article</name><label>No Article</label><locationX>176</locationX><locationY>600</locationY><assignmentItems><assignToReference>found</assignToReference><operator>Assign</operator><value><booleanValue>false</booleanValue></value></assignmentItems></assignments>
+
+<decisions><name>Article_Check</name><label>Article Check</label><locationX>176</locationX><locationY>300</locationY><defaultConnector><targetReference>No_Article</targetReference></defaultConnector><defaultConnectorLabel>Other</defaultConnectorLabel><rules><name>Article_exists</name><conditionLogic>and</conditionLogic><conditions><leftValueReference>Find_Article</leftValueReference><operator>IsNull</operator><rightValue><booleanValue>false</booleanValue></rightValue></conditions><connector><targetReference>Set_Article</targetReference></connector><label>Article exists</label></rules></decisions>
+
+<description>Returns one of the three Ascend Energy Knowledge articles by URL name, so the agent answers policy questions only from approved text.</description>
+<environments>Default</environments>
+<interviewLabel>Get Policy Article {!$Flow.CurrentDateTime}</interviewLabel>
+<label>Get Policy Article</label>
+<processMetadataValues><name>BuilderType</name><value><stringValue>LightningFlowBuilder</stringValue></value></processMetadataValues>
+<processType>AutoLaunchedFlow</processType>
+<recordLookups><name>Find_Article</name><label>Find Article</label><locationX>176</locationX><locationY>150</locationY><assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound><connector><targetReference>Article_Check</targetReference></connector><faultConnector><targetReference>No_Article</targetReference></faultConnector><filterLogic>and</filterLogic><filters><field>UrlName</field><operator>EqualTo</operator><value><elementReference>articleKey</elementReference></value></filters><filters><field>PublishStatus</field><operator>EqualTo</operator><value><stringValue>Online</stringValue></value></filters><filters><field>Language</field><operator>EqualTo</operator><value><stringValue>en_US</stringValue></value></filters><getFirstRecordOnly>true</getFirstRecordOnly><object>Knowledge__kav</object><storeOutputAutomatically>true</storeOutputAutomatically></recordLookups>
+
+<runInMode>SystemModeWithoutSharing</runInMode>
+<start><locationX>50</locationX><locationY>0</locationY><connector><targetReference>Find_Article</targetReference></connector></start>
+<status>Active</status>
+<variables><name>articleKey</name><dataType>String</dataType><isCollection>false</isCollection><isInput>true</isInput><isOutput>false</isOutput><description>One of: payment-options, late-fee-policy, power-outage-guidance</description></variables>
+
+<variables><name>found</name><dataType>Boolean</dataType><isCollection>false</isCollection><isInput>false</isInput><isOutput>true</isOutput><description>True if the article was found</description></variables>
+
+<variables><name>title</name><dataType>String</dataType><isCollection>false</isCollection><isInput>false</isInput><isOutput>true</isOutput><description>Article title</description></variables>
+
+<variables><name>content</name><dataType>String</dataType><isCollection>false</isCollection><isInput>false</isInput><isOutput>true</isOutput><description>Article text. The only source for policy answers</description></variables>
+
+</Flow>

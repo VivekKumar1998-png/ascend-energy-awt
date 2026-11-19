@@ -1,0 +1,22 @@
+{
+  "required" : [ "accountNumber", "phone" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "accountNumber" : {
+      "title" : "Account Number",
+      "description" : "The customer account number exactly as the customer typed it.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    },
+    "phone" : {
+      "title" : "Phone",
+      "description" : "The full registered phone number exactly as the customer typed it.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    }
+  },
+  "lightning:type" : "lightning__objectType",
+  "lightning:textIndexed" : true
+}

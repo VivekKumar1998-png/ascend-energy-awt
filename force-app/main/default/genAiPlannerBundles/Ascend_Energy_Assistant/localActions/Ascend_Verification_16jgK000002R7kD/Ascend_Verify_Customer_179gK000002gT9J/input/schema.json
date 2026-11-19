@@ -1,0 +1,39 @@
+{
+  "required": [
+    "accountNumber",
+    "phone"
+  ],
+  "unevaluatedProperties": false,
+  "properties": {
+    "accountNumber": {
+      "title": "Account Number",
+      "description": "The customer account number exactly as the customer typed it.",
+      "lightning:type": "lightning__textType",
+      "lightning:isPII": false,
+      "copilotAction:isUserInput": true
+    },
+    "phone": {
+      "title": "Phone",
+      "description": "The registered phone number exactly as the customer typed it. Exactly 10 digits, any format.",
+      "lightning:type": "lightning__textType",
+      "lightning:isPII": false,
+      "copilotAction:isUserInput": true
+    },
+    "claimsToBeSomeoneElse": {
+      "title": "Claims To Be Someone Else",
+      "description": "True only if the customer said at any point that they are not the account holder or are asking about another person. Otherwise false.",
+      "lightning:type": "lightning__booleanType",
+      "lightning:isPII": false,
+      "copilotAction:isUserInput": true
+    },
+    "endUserId": {
+      "title": "End User Id",
+      "description": "Id of the chat user. Filled in automatically by the system. Never ask the customer for it.",
+      "lightning:type": "lightning__textType",
+      "lightning:isPII": false,
+      "copilotAction:isUserInput": false
+    }
+  },
+  "lightning:type": "lightning__objectType",
+  "lightning:textIndexed": true
+}

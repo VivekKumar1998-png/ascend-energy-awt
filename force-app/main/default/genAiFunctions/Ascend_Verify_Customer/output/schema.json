@@ -1,0 +1,39 @@
+{
+  "unevaluatedProperties": false,
+  "properties": {
+    "verified": {
+      "title": "Verified",
+      "description": "True only if the account number and phone number both match the same customer.",
+      "lightning:type": "lightning__booleanType",
+      "lightning:isPII": false,
+      "copilotAction:isDisplayable": false,
+      "copilotAction:isUsedByPlanner": true
+    },
+    "blocked": {
+      "title": "Blocked",
+      "description": "True if verification was refused because the customer is not the account holder.",
+      "lightning:type": "lightning__booleanType",
+      "lightning:isPII": false,
+      "copilotAction:isDisplayable": false,
+      "copilotAction:isUsedByPlanner": true
+    },
+    "contactId": {
+      "title": "Contact Id",
+      "description": "Id of the verified customer. Empty if not verified. Stored automatically for all later steps.",
+      "lightning:type": "lightning__textType",
+      "lightning:isPII": false,
+      "copilotAction:isDisplayable": false,
+      "copilotAction:isUsedByPlanner": true
+    },
+    "firstName": {
+      "title": "First Name",
+      "description": "First name of the verified customer.",
+      "lightning:type": "lightning__textType",
+      "lightning:isPII": false,
+      "copilotAction:isDisplayable": false,
+      "copilotAction:isUsedByPlanner": true
+    }
+  },
+  "lightning:type": "lightning__objectType",
+  "lightning:textIndexed": true
+}

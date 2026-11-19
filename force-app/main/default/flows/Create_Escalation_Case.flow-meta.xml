@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+<apiVersion>68.0</apiVersion>
+<assignments><name>Set_Case_Number</name><label>Set Case Number</label><locationX>176</locationX><locationY>450</locationY><assignmentItems><assignToReference>caseNumber</assignToReference><operator>Assign</operator><value><elementReference>Get_Case_Number.CaseNumber</elementReference></value></assignmentItems></assignments>
+
+<description>Creates a Case for a human team member with the conversation summary and returns the case number.</description>
+<environments>Default</environments>
+<formulas><name>priorityFinal</name><dataType>String</dataType><expression>IF(OR({!priority} = "High", {!priority} = "Low", {!priority} = "Critical"), {!priority}, "Medium")</expression></formulas>
+
+<formulas><name>subjectText</name><dataType>String</dataType><expression>"Ascend Energy agent: " &amp; IF(ISBLANK({!caseType}), "Other", {!caseType})</expression></formulas>
+
+<interviewLabel>Create Escalation Case {!$Flow.CurrentDateTime}</interviewLabel>
+<label>Create Escalation Case</label>
+<processMetadataValues><name>BuilderType</name><value><stringValue>LightningFlowBuilder</stringValue></value></processMetadataValues>
+<processType>AutoLaunchedFlow</processType>
+<recordCreates><name>Create_Case</name><label>Create Case</label><locationX>176</locationX><locationY>150</locationY><connector><targetReference>Get_Case_Number</targetReference></connector><inputAssignments><field>Subject</field><value><elementReference>subjectText</elementReference></value></inputAssignments><inputAssignments><field>Description</field><value><elementReference>summary</elementReference></value></inputAssignments><inputAssignments><field>Priority</field><value><elementReference>priorityFinal</elementReference></value></inputAssignments><inputAssignments><field>Origin</field><value><stringValue>Chat</stringValue></value></inputAssignments><inputAssignments><field>Type</field><value><elementReference>caseType</elementReference></value></inputAssignments><inputAssignments><field>ContactId</field><value><elementReference>contactId</elementReference></value></inputAssignments><object>Case</object><storeOutputAutomatically>true</storeOutputAutomatically></recordCreates>
+
+<recordLookups><name>Get_Case_Number</name><label>Get Case Number</label><locationX>176</locationX><locationY>300</locationY><assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound><connector><targetReference>Set_Case_Number</targetReference></connector><filterLogic>and</filterLogic><filters><field>Id</field><operator>EqualTo</operator><value><elementReference>Create_Case</elementReference></value></filters><getFirstRecordOnly>true</getFirstRecordOnly><object>Case</object><storeOutputAutomatically>true</storeOutputAutomatically></recordLookups>
+
+<runInMode>SystemModeWithoutSharing</runInMode>
+<start><locationX>50</locationX><locationY>0</locationY><connector><targetReference>Create_Case</targetReference></connector></start>
+<status>Active</status>
+<variables><name>contactId</name><dataType>String</dataType><isCollection>false</isCollection><isInput>true</isInput><isOutput>false</isOutput><description>Id of the verified customer. Leave empty if the customer is not verified</description></variables>
+
+<variables><name>caseType</name><dataType>String</dataType><isCollection>false</isCollection><isInput>true</isInput><isOutput>false</isOutput><description>Payment Extension, Outage - Priority, Tariff Change, New Connection or Other</description></variables>
+
+<variables><name>priority</name><dataType>String</dataType><isCollection>false</isCollection><isInput>true</isInput><isOutput>false</isOutput><description>High for a medical device or safety risk. Otherwise Medium</description></variables>
+
+<variables><name>summary</name><dataType>String</dataType><isCollection>false</isCollection><isInput>true</isInput><isOutput>false</isOutput><description>Short summary of the conversation and what the customer needs</description></variables>
+
+<variables><name>caseNumber</name><dataType>String</dataType><isCollection>false</isCollection><isInput>false</isInput><isOutput>true</isOutput><description>Case number to give to the customer</description></variables>
+
+</Flow>

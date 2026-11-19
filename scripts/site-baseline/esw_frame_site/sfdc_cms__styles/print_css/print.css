@@ -1,0 +1,11 @@
+@media print {
+    /* Hide href for all links */
+    /* a[href]:after {
+        content: none !important;
+    } */
+
+    /* Example: hides header and footer for LWR templates */
+    /* header, footer {
+        display: none !important;
+    } */
+}

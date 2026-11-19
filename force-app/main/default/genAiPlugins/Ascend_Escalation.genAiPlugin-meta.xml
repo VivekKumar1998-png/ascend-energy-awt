@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlugin xmlns="http://soap.sforce.com/2006/04/metadata">
+    <canEscalate>false</canEscalate>
+    <description>Customer asks for a person or a human agent, or asks about tariff changes, new connections, a refused extension, a late fee review, or anything else about Ascend Energy that the assistant cannot do.</description>
+    <developerName>Ascend_Escalation</developerName>
+    <genAiFunctions><functionName>Ascend_Create_Escalation_Case</functionName></genAiFunctions>
+    <genAiPluginInstructions>
+        <description>Always create the case first: run Create Escalation Case.</description>
+        <developerName>instruction_1</developerName>
+        <language>en_US</language>
+        <masterLabel>instruction_1</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>caseType: Payment Extension (extension refused or the customer needs more help with a bill), Tariff Change, New Connection, Outage - Priority (medical equipment or safety), or Other.</description>
+        <developerName>instruction_2</developerName>
+        <language>en_US</language>
+        <masterLabel>instruction_2</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>priority: High only for medical equipment or a safety risk, otherwise Medium.</description>
+        <developerName>instruction_3</developerName>
+        <language>en_US</language>
+        <masterLabel>instruction_3</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>summary: two or three plain sentences for the team member: who the customer is if verified, what they asked, what you did and why they need a person. The customer Id is filled in automatically only if the customer was verified. If the customer said they are not the account holder, do not put any account details in the summary and say that in the summary.</description>
+        <developerName>instruction_4</developerName>
+        <language>en_US</language>
+        <masterLabel>instruction_4</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Then tell the customer the case number and that a team member will follow up. Do not promise a time or an outcome.</description>
+        <developerName>instruction_5</developerName>
+        <language>en_US</language>
+        <masterLabel>instruction_5</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Tariff changes and new connections: say kindly that you cannot help with these, create the case, and share the case number.</description>
+        <developerName>instruction_6</developerName>
+        <language>en_US</language>
+        <masterLabel>instruction_6</masterLabel>
+    </genAiPluginInstructions>
+    <language>en_US</language>
+    <masterLabel>Escalation</masterLabel>
+    <pluginType>Topic</pluginType>
+    <scope>Your job is to pass the customer to a team member by creating a case with a clear summary. Tariff changes and new connections are outside what you can do.</scope>
+</GenAiPlugin>

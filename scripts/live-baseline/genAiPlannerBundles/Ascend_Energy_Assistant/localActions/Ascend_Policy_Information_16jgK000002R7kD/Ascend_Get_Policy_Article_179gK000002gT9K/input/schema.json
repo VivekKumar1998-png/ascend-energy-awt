@@ -1,0 +1,15 @@
+{
+  "required" : [ "articleKey" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "articleKey" : {
+      "title" : "Article Key",
+      "description" : "Exactly one of: payment-options, late-fee-policy, power-outage-guidance.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    }
+  },
+  "lightning:type" : "lightning__objectType",
+  "lightning:textIndexed" : true
+}

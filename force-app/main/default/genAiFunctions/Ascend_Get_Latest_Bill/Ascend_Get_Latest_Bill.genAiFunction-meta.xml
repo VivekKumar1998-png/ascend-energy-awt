@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Gets the latest bill (most recent due date) for the verified customer: bill number, amount, due date, status, whether it was already extended, and days overdue. The contactId input is filled in automatically from the stored verified customer.</description>
+    <invocationTarget>Get_Latest_Bill</invocationTarget>
+    <invocationTargetType>flow</invocationTargetType>
+    <isConfirmationRequired>false</isConfirmationRequired>
+    <masterLabel>Get Latest Bill</masterLabel>
+</GenAiFunction>

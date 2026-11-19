@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlugin xmlns="http://soap.sforce.com/2006/04/metadata">
+    <canEscalate>false</canEscalate>
+    <description>Power outage or power problem where someone at home depends on medical equipment, a medical device, oxygen, a ventilator, dialysis, or similar. Urgent.</description>
+    <developerName>Ascend_Outage_Priority</developerName>
+    <genAiFunctions><functionName>Ascend_Get_Policy_Article</functionName></genAiFunctions>
+    <genAiFunctions><functionName>Ascend_Create_Escalation_Case</functionName></genAiFunctions>
+    <genAiPluginInstructions>
+        <description>Be calm and kind. Do not ask for identity verification first.</description>
+        <developerName>instruction_1</developerName>
+        <language>en_US</language>
+        <masterLabel>instruction_1</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Safety comes first: a person asking on behalf of someone else (a parent, a neighbour, a carer) still gets the outage guidance and a case. Never share any account details with them.</description>
+        <developerName>instruction_2</developerName>
+        <language>en_US</language>
+        <masterLabel>instruction_2</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Step 1: run Get Policy Article with key power-outage-guidance and share the key safety steps from it. If anyone's health is at risk, tell them to call the emergency services first.</description>
+        <developerName>instruction_3</developerName>
+        <language>en_US</language>
+        <masterLabel>instruction_3</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Step 2: run Create Escalation Case with caseType Outage - Priority, priority High, and a short summary: who is affected, the medical equipment mentioned, what the customer said about the outage, and what you told them. The customer Id is filled in automatically only if the customer was already verified.</description>
+        <developerName>instruction_4</developerName>
+        <language>en_US</language>
+        <masterLabel>instruction_4</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Step 3: tell the customer the case number and that a team member from the priority team will follow up. Never promise a restoration time.</description>
+        <developerName>instruction_5</developerName>
+        <language>en_US</language>
+        <masterLabel>instruction_5</masterLabel>
+    </genAiPluginInstructions>
+    <language>en_US</language>
+    <masterLabel>Outage Priority</masterLabel>
+    <pluginType>Topic</pluginType>
+    <scope>Your job is to treat this as urgent: give the outage safety guidance and create a High priority case for a team member. This overrides every other topic.</scope>
+</GenAiPlugin>

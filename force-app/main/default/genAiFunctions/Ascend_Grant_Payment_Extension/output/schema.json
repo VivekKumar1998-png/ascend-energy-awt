@@ -1,0 +1,63 @@
+{
+  "unevaluatedProperties": false,
+  "properties": {
+    "granted": {
+      "title": "Granted",
+      "description": "True if the extension was applied.",
+      "lightning:type": "lightning__booleanType",
+      "lightning:isPII": false,
+      "copilotAction:isDisplayable": false,
+      "copilotAction:isUsedByPlanner": true
+    },
+    "reasonCode": {
+      "title": "Reason Code",
+      "description": "OK, NO_BILL, ALREADY_PAID, ALREADY_EXTENDED or TOO_OVERDUE.",
+      "lightning:type": "lightning__textType",
+      "lightning:isPII": false,
+      "copilotAction:isDisplayable": false,
+      "copilotAction:isUsedByPlanner": true
+    },
+    "billNumber": {
+      "title": "Bill Number",
+      "description": "Bill number.",
+      "lightning:type": "lightning__textType",
+      "lightning:isPII": false,
+      "copilotAction:isDisplayable": false,
+      "copilotAction:isUsedByPlanner": true
+    },
+    "oldDueDate": {
+      "title": "Old Due Date",
+      "description": "Due date before the extension.",
+      "lightning:type": "lightning__dateType",
+      "lightning:isPII": false,
+      "copilotAction:isDisplayable": false,
+      "copilotAction:isUsedByPlanner": true
+    },
+    "newDueDate": {
+      "title": "New Due Date",
+      "description": "Due date after the extension.",
+      "lightning:type": "lightning__dateType",
+      "lightning:isPII": false,
+      "copilotAction:isDisplayable": false,
+      "copilotAction:isUsedByPlanner": true
+    },
+    "stillOverdue": {
+      "title": "Still Overdue",
+      "description": "True if the new due date is still in the past.",
+      "lightning:type": "lightning__booleanType",
+      "lightning:isPII": false,
+      "copilotAction:isDisplayable": false,
+      "copilotAction:isUsedByPlanner": true
+    },
+    "daysOverdue": {
+      "title": "Days Overdue",
+      "description": "Days past the original due date.",
+      "lightning:type": "lightning__numberType",
+      "lightning:isPII": false,
+      "copilotAction:isDisplayable": false,
+      "copilotAction:isUsedByPlanner": true
+    }
+  },
+  "lightning:type": "lightning__objectType",
+  "lightning:textIndexed": true
+}
